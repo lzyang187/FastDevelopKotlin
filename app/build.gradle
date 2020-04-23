@@ -1,31 +1,45 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    signingConfigs {
+        default_sign {
+            keyAlias 'fastdevelop'
+            keyPassword 'lzyang'
+            storeFile file('lzy.keystore')
+            storePassword 'lzyang'
+            v2SigningEnabled true
+        }
+    }
+
     defaultConfig {
         applicationId "com.lzy.fastdevelopkotlin"
-        minSdkVersion 21
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        multiDexEnabled true
     }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.default_sign
+        }
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.default_sign
+            //启用资源压缩
+            shrinkResources true
+            zipAlignEnabled true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'androidx.core:core-ktx:1.1.0-alpha03'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation project(':coreBiz')
 }
