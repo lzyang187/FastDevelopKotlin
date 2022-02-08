@@ -3,3 +3,4 @@ include ':app',
         ':libView',
         ':coreBiz',
         ':libBaseFunction'
+include ':libHttp'
