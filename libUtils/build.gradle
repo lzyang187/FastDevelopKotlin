@@ -1,15 +1,14 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply from: '../config.gradle'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+    compileSdkVersion project.ext.compileSdkVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
     }
 
     buildTypes {
@@ -25,6 +24,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.google.code.gson:gson:2.8.5'
+    api 'androidx.appcompat:appcompat:1.4.1'
+    api 'androidx.core:core-ktx:1.7.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1'
 }

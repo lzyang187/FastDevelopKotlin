@@ -20,11 +20,11 @@ object NetWorkUtil {
     fun getNetWorkType(context: Context): Int {
         val manager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         var netWorkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
-        if (netWorkInfo.isConnected) {
+        if (netWorkInfo!!.isConnected) {
             return WORKTYPE_WIFI
         }
         netWorkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
-        if (netWorkInfo.isConnected) {
+        if (netWorkInfo!!.isConnected) {
             return WORKTYPE_MOBILE
         }
         return WORKTYPE_NONE

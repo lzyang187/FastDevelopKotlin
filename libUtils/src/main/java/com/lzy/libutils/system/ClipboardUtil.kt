@@ -12,7 +12,7 @@ import android.content.Context
 object ClipboardUtil {
     fun copyText(context: Context, text: String) {
         val manager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-        manager.primaryClip = ClipData.newPlainText("simple text copy", text)
+//        manager.primaryClip = ClipData.newPlainText("simple text copy", text)
     }
 
     fun getText(context: Context): String {
